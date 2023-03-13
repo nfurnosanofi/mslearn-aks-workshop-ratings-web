@@ -2,6 +2,10 @@ FROM node:14-alpine
 
 WORKDIR /usr/src/app
 
+RUN cp -v /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem /etc/ssl/certs/ca-certificates.crt
+
+ENV NODE_EXTRA_CA_CERTS /etc/ssl/certs/ca-certificates.crt
+
 # Install build dependencies via apk
 RUN apk update && apk add python3 g++ make && rm -rf /var/cache/apk/*
 
